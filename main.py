@@ -35,8 +35,20 @@ def search_recipes(ingredients, recipes):
     """
     suggested_recipes = []
     for recipe in recipes:
-        if all(ingredient in ingredients for ingredient in recipe['ingredients']):
+        missing_ingredients = [ingredient for ingredient in recipe['ingredients'] if ingredient not in ingredients]
+        if not missing_ingredients:
             suggested_recipes.append(recipe)
+        else:
+            # Add recipes that require at most 2 missing ingredients (prioritize those with fewer)
+            if len(missing_ingredients) <= 2:
+                recipe['missing_ingredients'] = missing_ingredients
+                suggested_recipes.append(recipe)
+
+    # Sort the suggested recipes: first by whether they require missing ingredients, then by number of missing ingredients
+    suggested_recipes.sort(key=lambda x: (
+        'missing_ingredients' in x,  # Prioritize recipes without missing ingredients
+        len(x.get('missing_ingredients', []))  # Then prioritize fewer missing ingredients
+    ))
     return suggested_recipes
 
 def display_menu():
@@ -70,7 +82,10 @@ def main():
                 if suggested_recipes:
                     print("Suggested Recipes:")
                     for recipe in suggested_recipes:
-                        print(f"- {recipe['name']}")
+                        if 'missing_ingredients' in recipe:
+                            print(f"- {recipe['name']} (Missing: {', '.join(recipe['missing_ingredients'])})")
+                        else:
+                            print(f"- {recipe['name']}")
                 else:
                     print("No recipes found that can be made with the given ingredients.")
 
