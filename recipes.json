@@ -1,1 +1,53 @@
-# recipes.json - Created by AI Programmer
+json
+[
+  {
+    "name": "Tomato Soup",
+    "ingredients": ["tomato", "onion", "garlic", "vegetable broth", "olive oil", "salt", "pepper"],
+    "instructions": [
+      "Sauté onion and garlic in olive oil until softened.",
+      "Add tomatoes and vegetable broth. Bring to a boil.",
+      "Reduce heat and simmer for 20 minutes.",
+      "Blend until smooth. Season with salt and pepper."
+    ]
+  },
+  {
+    "name": "Scrambled Eggs",
+    "ingredients": ["eggs", "milk", "butter", "salt", "pepper"],
+    "instructions": [
+      "Whisk eggs and milk together.",
+      "Melt butter in a pan over medium heat.",
+      "Pour egg mixture into the pan.",
+      "Cook, stirring occasionally, until eggs are set.",
+      "Season with salt and pepper."
+    ]
+  },
+  {
+    "name": "Pasta with Pesto",
+    "ingredients": ["pasta", "pesto", "parmesan cheese"],
+    "instructions": [
+      "Cook pasta according to package directions.",
+      "Drain pasta and toss with pesto.",
+      "Serve with parmesan cheese."
+    ]
+  },
+  {
+    "name": "Chicken Stir-Fry",
+    "ingredients": ["chicken breast", "soy sauce", "ginger", "garlic", "broccoli", "carrots", "onion", "sesame oil"],
+    "instructions": [
+      "Cut chicken into bite-sized pieces.",
+      "Marinate chicken in soy sauce, ginger, and garlic.",
+      "Stir-fry vegetables in sesame oil until tender-crisp.",
+      "Add chicken and cook until browned.",
+      "Serve over rice or noodles."
+    ]
+  },
+  {
+    "name": "Guacamole",
+    "ingredients": ["avocado", "lime juice", "onion", "cilantro", "salt", "jalapeno (optional)"],
+    "instructions": [
+      "Mash avocados in a bowl.",
+      "Add lime juice, onion, cilantro, salt, and jalapeno (if using).",
+      "Mix well and serve with tortilla chips."
+    ]
+  }
+]
