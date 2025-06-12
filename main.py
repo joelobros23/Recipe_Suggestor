@@ -56,7 +56,24 @@ def display_menu():
     print("-----------------------")
     print("1. Enter available ingredients")
     print("2. Get recipe suggestions")
-    print("3. Exit")
+    print("3. View recipe details")
+    print("4. Exit")
+
+def display_recipe_details(recipe):
+    """Displays the details of a given recipe.
+
+    Args:
+        recipe (dict): A dictionary containing the recipe details.
+    """
+    print("\nRecipe Details:")
+    print(f"Name: {recipe['name']}")
+    print("Ingredients:")
+    for ingredient in recipe['ingredients']:
+        print(f"- {ingredient}")
+    print("Instructions:")
+    print(recipe['instructions'])
+    print("-----------------------\n")
+
 
 def main():
     available_ingredients = []
@@ -81,15 +98,37 @@ def main():
                 suggested_recipes = search_recipes(available_ingredients, recipes)
                 if suggested_recipes:
                     print("Suggested Recipes:")
-                    for recipe in suggested_recipes:
-                        if 'missing_ingredients' in recipe:
-                            print(f"- {recipe['name']} (Missing: {', '.join(recipe['missing_ingredients'])})")
-                        else:
-                            print(f"- {recipe['name']}")
+                    for i, recipe in enumerate(suggested_recipes):
+                        missing_ingredients_str = f" (Missing: {', '.join(recipe.get('missing_ingredients', []))})" if 'missing_ingredients' in recipe else ""
+                        print(f"{i+1}. {recipe['name']}{missing_ingredients_str}")
                 else:
                     print("No recipes found that can be made with the given ingredients.")
 
         elif choice == '3':
+            if not recipes:
+                print("No recipes loaded. Please check your recipes.json file.")
+            elif not available_ingredients:
+                print("Please enter available ingredients first.")
+            else:
+                suggested_recipes = search_recipes(available_ingredients, recipes)
+                if suggested_recipes:
+                    print("Suggested Recipes:")
+                    for i, recipe in enumerate(suggested_recipes):
+                        missing_ingredients_str = f" (Missing: {', '.join(recipe.get('missing_ingredients', []))})" if 'missing_ingredients' in recipe else ""
+                        print(f"{i+1}. {recipe['name']}{missing_ingredients_str}")
+
+                    recipe_number = input("Enter the number of the recipe to view details (or '0' to go back): ")
+                    if recipe_number.isdigit():
+                        recipe_number = int(recipe_number)
+                        if 1 <= recipe_number <= len(suggested_recipes):
+                            display_recipe_details(suggested_recipes[recipe_number - 1])
+                        elif recipe_number != 0:
+                            print("Invalid recipe number.")
+                else:
+                    print("No recipes found that can be made with the given ingredients.")
+
+
+        elif choice == '4':
             print("Exiting...")
             break
 
